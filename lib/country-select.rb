@@ -87,9 +87,9 @@ module ActionView
         content_tag("select",
           add_options(
             country_options_for_select(value, priority_countries),
-            options, value
+            options.html_safe, value
           ), html_options
-        ).html_safe
+        )
       end
     end
 
