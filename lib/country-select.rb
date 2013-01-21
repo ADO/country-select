@@ -28,8 +28,11 @@ module ActionView
         end
 
         country_options = country_options.html_safe if country_options.respond_to?(:html_safe)
-
-        return country_options + options_for_select(COUNTRIES, selected)
+        
+        other_country_options = options_for_select(COUNTRIES, selected)
+        other_country_options = other_country_options.html_safe if other_country_options.respond_to?(:html_safe)
+        
+        return country_options + other_country_options
       end
 
       # All the countries included in the country_options output.
