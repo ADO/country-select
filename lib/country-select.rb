@@ -27,14 +27,7 @@ module ActionView
           selected = nil if priority_countries.include?(selected)
         end
 
-        country_options = country_options.html_safe
-        
-        other_country_options = options_for_select(COUNTRIES, selected)
-        other_country_options = other_country_options.html_safe
-        
-        combined = country_options + other_country_options
-        combined = combined.html_safe
-        return combined
+        return country_options + options_for_select(COUNTRIES, selected).html_safe
       end
 
       # All the countries included in the country_options output.
@@ -85,10 +78,8 @@ module ActionView
         add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
-          add_options(
-            country_options_for_select(value, priority_countries).html_safe,
-            options, value
-          ), html_options
+          country_options_for_select(value, priority_countries),
+          html_options
         )
       end
     end
