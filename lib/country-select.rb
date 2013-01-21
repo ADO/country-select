@@ -12,14 +12,14 @@ module ActionView
       #
       # NOTE: Only the option tags are returned, you have to wrap this call in a regular HTML select tag.
       def country_options_for_select(selected = nil, priority_countries = nil)
-        country_options = ""
+        country_options = "".html_safe
 
         if priority_countries
           if (unlisted = priority_countries - COUNTRIES).any?
             raise RuntimeError.new("Supplied priority countries are not in the main list: #{unlisted}")
           end
-          country_options += options_for_select(priority_countries, selected)
-          country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n"
+          country_options += options_for_select(priority_countries, selected).html_safe
+          country_options += "<option value=\"\" disabled=\"disabled\">-------------</option>\n".html_safe
 
           # prevents selected from being included twice in the HTML which causes
           # some browsers to select the second selected option (not priority)
@@ -86,8 +86,8 @@ module ActionView
         value = value(object)
         content_tag("select",
           add_options(
-            country_options_for_select(value, priority_countries),
-            options.html_safe, value
+            country_options_for_select(value, priority_countries).html_safe,
+            options, value
           ), html_options
         )
       end
