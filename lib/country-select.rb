@@ -27,13 +27,13 @@ module ActionView
           selected = nil if priority_countries.include?(selected)
         end
 
-        country_options = country_options.html_safe if country_options.respond_to?(:html_safe)
+        country_options = country_options.html_safe
         
         other_country_options = options_for_select(COUNTRIES, selected)
-        other_country_options = other_country_options.html_safe if other_country_options.respond_to?(:html_safe)
+        other_country_options = other_country_options.html_safe
         
         combined = country_options + other_country_options
-        combined = combined.html_safe if combined.respond_to?(:html_safe)
+        combined = combined.html_safe
         return combined
       end
 
@@ -81,15 +81,15 @@ module ActionView
 
     class InstanceTag
       def to_country_select_tag(priority_countries, options, html_options)
-        # html_options = html_options.stringify_keys
-        # add_default_name_and_id(html_options)
+        html_options = html_options.stringify_keys
+        add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
           add_options(
             country_options_for_select(value, priority_countries),
             options, value
           ), html_options
-        )
+        ).html_safe
       end
     end
 
