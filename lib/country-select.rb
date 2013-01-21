@@ -81,8 +81,8 @@ module ActionView
 
     class InstanceTag
       def to_country_select_tag(priority_countries, options, html_options)
-        html_options = html_options.stringify_keys
-        add_default_name_and_id(html_options)
+        # html_options = html_options.stringify_keys
+        # add_default_name_and_id(html_options)
         value = value(object)
         content_tag("select",
           add_options(
